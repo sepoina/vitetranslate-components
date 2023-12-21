@@ -23,7 +23,7 @@ const PLUGINS = [
       autoprefixer,
     ],
   }),
-  babel({
+   babel({
     babelHelpers: 'runtime',
     exclude: '**/node_modules/**',
   }),
