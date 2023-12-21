@@ -34,12 +34,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sepoina/viteTranslate.git"
+    "url": "git+https://github.com/sepoina/vitetranslate-components.git"
   },
   "bugs": {
-    "url": "https://github.com/sepoina/viteTranslate/issues"
+    "url": "https://github.com/sepoina/vitetranslate-components/issues"
   },
-  "homepage": "https://github.com/sepoina/viteTranslate#readme",
+  "homepage": "https://github.com/sepoina/vitetranslate-components#readme",
 
 
 
