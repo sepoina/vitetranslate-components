@@ -1,0 +1,90 @@
+{
+  "name": "@sepoina/vitetranslate-components",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Some simple react components for language.",
+  "author": {
+    "name": "Giancarlo Ghigi",
+    "email": "ripensamento@gmail.com"
+  },
+  "keywords": [
+    "react",
+    "babel",
+    "vite",
+    "rollup",
+    "translate",
+    "styled",
+    "components",
+    "data",
+    "attributes",
+    "property"
+  ],
+  "tags": [
+    "react",
+    "babel",
+    "vite",
+    "rollup",
+    "translate",
+    "styled",
+    "components",
+    "data",
+    "attributes",
+    "property"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sepoina/viteTranslate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sepoina/viteTranslate/issues"
+  },
+  "homepage": "https://github.com/sepoina/viteTranslate#readme",
+
+
+
+  "type": "module",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "browser": "build/index.js",
+  
+  
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "npx rollup -c"
+  },
+
+  "publishConfig": {
+    "access": "public"
+  },
+
+  "peerDependencies": {
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+   "storybook-deployer": {
+    "gitUsername": "jaebradley",
+    "gitEmail": "jae.b.bradley@gmail.com"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/plugin-transform-runtime": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^4.9.1",
+    "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  },
+  "dependencies": { }
+}
