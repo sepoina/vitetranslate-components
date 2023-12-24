@@ -1,12 +1,10 @@
-import * as React from "react";
-import { createContext } from "react";
-
-export const TranslateContext = createContext(null);
+import React from "react";
+import { TranslateContext } from "./TranslateContext";
 
 const last = { langID: null };
 
-export function TranslateContainer({ children }) {
-  const [langID, setLangID] = React.useState("it");
+export default function TranslateContainer({ predefined, children }) {
+  const [langID, setLangID] = React.useState(predefined);
   const [langOBJ, setLangOBJ] = React.useState(null);
 
   const handleChangeLanguage = newLanguage => {
@@ -35,6 +33,7 @@ export function TranslateContainer({ children }) {
         });
       } catch (error) {
         console.log(`Errore nel file locale/${langID}.json `);
+        setLangID(predefined);
         return;
       }
     };
