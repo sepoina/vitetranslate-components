@@ -1,6 +1,6 @@
 {
   "name": "@sepoina/vitetranslate-components",
-  "version": "1.0.893",
+  "version": "1.0.894",
   "private": false,
   "module": "dist/index.js",
   "description": "Some simple react components for language.",
