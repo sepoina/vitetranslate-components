@@ -17,7 +17,7 @@ export default function Translate({ 'data-translate': dataTranslate, t, c, a, ch
         // console.log("rerender:", inputString);
         //
         // non c'è dataTranslate, può essere che sia inlinea, se lo è è nel parametro c
-        if (!dataTranslate) {
+        if (!dataTranslate || (inputString.startsWith("_<_") && inputString.endsWith("_>_"))) {
             const matches = inputString.match(/_<_(.*?)_\/_(.*?)_>_/);
             if (matches) {
                 dataTranslate = matches[1]; // Contenuto tra "_<_" e "_/_"

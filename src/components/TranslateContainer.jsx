@@ -4,45 +4,52 @@ import { TranslateContext } from "./TranslateContext";
 const last = { langID: null };
 
 export default function TranslateContainer({ predefined, children }) {
-  const [langID, setLangID] = React.useState(predefined);
+  const [propose, setPropose] = React.useState({ lang: predefined });
   const [langOBJ, setLangOBJ] = React.useState(null);
 
-  const handleChangeLanguage = newLanguage => {
-    setLangID(newLanguage);
+  // struttura funzione proposeNewLanguage({
+  //   lang:'it',
+  //   onStart: () => {},      // a inizio caricamento
+  //   onDone: (isOk) => {},   // a fine caricamento isOk - true o false
+  //   onError: (error) => {}, // in caso di errore, struttura error
+  //  })
+  const proposeNewLanguage = propObj => {
+    setPropose(propObj);
   };
 
   React.useEffect(() => {
-    if (!langID) return;
-    if (last.langID === langID) return; // già in caricamento
-    last.langID = langID;
-
+    if (!propose.lang) return;
+    if (last.langID === propose.lang) return; // già in caricamento
+    last.langID = propose.lang; // evita doppie interazioni
+    if (propose.onStart) propose.onStart(true);
     // declare the async data fetching function
     const fetchData = async () => {
       try {
         // get the data from the api
-        // console.log("Carico:", langID);
-        const response = await fetch(`./locale/${langID}.json`);
+        // console.log("Carico:", propose.lang);
+        const response = await fetch(`./locale/${propose.lang}.json`);
         // convert the data to json
         const json = await response.json();
         // set state with the result
         // console.log("Fatto.");
+        if (propose.onDone) propose.onDone(true);
         setLangOBJ({
-          id: langID,
+          id: propose.lang,
           table: json,
-          setNewLanguage: handleChangeLanguage,
+          proposeNewLanguage: proposeNewLanguage,
         });
       } catch (error) {
-        console.log(`Errore nel file locale/${langID}.json `);
-        setLangID(predefined);
+        if (propose.onError) propose.onError({error:error, inexistID:propose.lang});
+        else console.error(`Inexistant or error in language file ./locale/${propose.lang}.json `);
+        if (propose.onDone) propose.onDone(false);
+        // setPropose({ lang: predefined });
         return;
       }
     };
 
     // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
-  }, [langID]);
+    fetchData();
+  }, [propose.lang]);
 
   return (
     <TranslateContext.Provider value={langOBJ}>

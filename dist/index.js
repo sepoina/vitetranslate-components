@@ -1,52 +1,52 @@
-import c, { createContext as m, useContext as p, useMemo as D } from "react";
+import l, { createContext as m, useContext as D, useMemo as _ } from "react";
 const g = m(null), u = { langID: null };
-function C({ predefined: e, children: r }) {
-  const [t, n] = c.useState(e), [i, o] = c.useState(null), a = (s) => {
-    n(s);
+function S({ predefined: n, children: r }) {
+  const [e, t] = l.useState({ lang: n }), [c, o] = l.useState(null), a = (i) => {
+    t(i);
   };
-  return c.useEffect(() => {
-    if (!t || u.langID === t)
+  return l.useEffect(() => {
+    if (!e.lang || u.langID === e.lang)
       return;
-    u.langID = t, (async () => {
+    u.langID = e.lang, e.onStart && e.onStart(!0), (async () => {
       try {
-        const h = await (await fetch(`./locale/${t}.json`)).json();
-        o({
-          id: t,
-          table: h,
-          setNewLanguage: a
+        const p = await (await fetch(`./locale/${e.lang}.json`)).json();
+        e.onDone && e.onDone(!0), o({
+          id: e.lang,
+          table: p,
+          proposeNewLanguage: a
         });
-      } catch {
-        console.log(`Errore nel file locale/${t}.json `), n(e);
+      } catch (s) {
+        e.onError ? e.onError({ error: s, inexistID: e.lang }) : console.error(`Inexistant or error in language file ./locale/${e.lang}.json `), e.onDone && e.onDone(!1);
         return;
       }
-    })().catch(console.error);
-  }, [t]), /* @__PURE__ */ c.createElement(g.Provider, { value: i }, r);
+    })();
+  }, [e.lang]), /* @__PURE__ */ l.createElement(g.Provider, { value: c }, r);
 }
-function E({ "data-translate": e, t: r, c: t, a: n, children: i }) {
-  const o = p(g);
-  return D(() => {
-    var s;
-    let a = t || r || i;
-    if (!e) {
-      const l = a.match(/_<_(.*?)_\/_(.*?)_>_/);
-      if (l)
-        e = l[1], a = l[2];
+function E({ "data-translate": n, t: r, c: e, a: t, children: c }) {
+  const o = D(g);
+  return _(() => {
+    var i;
+    let a = e || r || c;
+    if (!n || a.startsWith("_<_") && a.endsWith("_>_")) {
+      const s = a.match(/_<_(.*?)_\/_(.*?)_>_/);
+      if (s)
+        n = s[1], a = s[2];
       else
         throw "errore nel servizio di traduzione, manca translate";
     }
-    return (s = o == null ? void 0 : o.table) != null && s[e] ? /* @__PURE__ */ c.createElement("span", { "data-from-translate": e }, n ? f(o.table[e], n) : o.table[e]) : /* @__PURE__ */ c.createElement("span", { "data-not-translate": e }, n ? f(a, n) : a);
-  }, [o, n]);
+    return (i = o == null ? void 0 : o.table) != null && i[n] ? /* @__PURE__ */ l.createElement("span", { "data-from-translate": n }, t ? f(o.table[n], t) : o.table[n]) : /* @__PURE__ */ l.createElement("span", { "data-not-translate": n }, t ? f(a, t) : a);
+  }, [o, t]);
 }
-function f(e, r) {
+function f(n, r) {
   if (r === void 0)
-    return e;
-  const t = Array.isArray(r) ? r : [r];
-  let n = 0;
-  return e.replace(/%s/g, () => t[n++]);
+    return n;
+  const e = Array.isArray(r) ? r : [r];
+  let t = 0;
+  return n.replace(/%s/g, () => e[t++]);
 }
 export {
   E as Translate,
-  C as TranslateContainer,
+  S as TranslateContainer,
   g as TranslateContext
 };
 //# sourceMappingURL=index.js.map
